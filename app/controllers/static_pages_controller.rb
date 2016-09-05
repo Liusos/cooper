@@ -7,4 +7,7 @@ class StaticPagesController < ApplicationController
 
   def resultados
   end
+
+  def contacto    
+  end
 end
