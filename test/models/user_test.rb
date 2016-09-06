@@ -3,8 +3,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
   def setup
-    @user = User.new(depto: "101", birthyear: "1970", genere: "male",
-                     email: "ejemplo@gmial.com", condo: "beta", password: "foobar",
+    @user = User.new(depto: "101", condo: "beta", password: "foobar",
                      password_confirmation: "foobar")
   end
 
@@ -13,60 +12,31 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "depto should be present" do
-    @user.depto = "        "
-    assert_not @user.valid?
-  end
-
-  test "age should be present" do
-    @user.birthyear = "         "
-    assert_not @user.valid?
-  end
-
-  test "genere should be present" do
-    @user.genere = "      "
+    @user.depto = "     "
     assert_not @user.valid?
   end
 
   test "condo should be present" do
-    @user.condo = "       "
+    @user.condo = "     "
     assert_not @user.valid?
   end
 
-  test "email should not be too long" do
-    @user.email = "a" * 244 + "@example.com"
+  test "depto should not be too long" do
+    @user.depto = "a" * 6
     assert_not @user.valid?
   end
 
-  test "email validation should accept valid addresses" do
-    valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org
-                         first.last@foo.jp alice+bob@baz.cn]
-    valid_addresses.each do |valid_address|
-      @user.email = valid_address
-      assert @user.valid?, "#{valid_address.inspect} should be valid"
+  test "condo should not be too long" do
+    @user.condo = "a" * 11
+    assert_not @user.valid?
+  end
+
+  test "depto validation should reject invalid deptos" do
+    invalid_deptos = %w[1 p A 11 aa AA]
+    invalid_deptos.each do |invalid_depto|
+      @user.depto = invalid_depto
+      assert_not @user.valid?, "#{invalid_depto.inspect} should be valid"
     end
-  end
-
-  test "email validation should reject invalid addresses" do
-    invalid_addresses = %w[user@example,com user_at_foo.org user.name@example.
-                           foo@bar_baz.com foo@bar+baz.com]
-    invalid_addresses.each do |invalid_address|
-      @user.email = invalid_address
-      assert_not @user.valid?, "#{invalid_address.inspect} should be invalid"
-    end
-  end
-
-  test "email addresses should be unique" do
-    duplicate_user = @user.dup
-    duplicate_user.email = @user.email.upcase
-    @user.save
-    assert_not duplicate_user.valid?
-  end
-
-  test "email addresses should be saved as lower-case" do
-    mixed_case_email = "Foo@ExAMPle.CoM"
-    @user.email = mixed_case_email
-    @user.save
-    assert_equal mixed_case_email.downcase, @user.reload.email
   end
 
   test "password should be present (nonblank)" do
