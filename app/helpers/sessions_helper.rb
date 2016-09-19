@@ -1,0 +1,26 @@
+module SessionsHelper
+
+  #Hace el logueo del usuario dado
+  def log_in(user)
+    session[:user_id] = user.id
+  end
+
+  #Regresa el usuario logueado actual (si es que hay alguno)
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id])
+  end
+
+  def depto_user
+    @current_user.depto
+  end
+
+  def logged_in?
+    !current_user.nil?
+  end
+
+  #Log out the current_user
+  def log_out
+    session.delete(:user_id)
+    @current_user = nil
+  end
+end
