@@ -1,0 +1,13 @@
+<% provide(:title, 'Todos los participantes') %>
+<h1>Participantes</h1>
+
+<%= will_paginate %>
+
+<ul class="users">
+    <%= render @users %>
+    <br>
+    <%= link_to "Agregar", signup_path, class: "btn btn-primary" %>
+</ul>
+
+
+<%= will_paginate %>
