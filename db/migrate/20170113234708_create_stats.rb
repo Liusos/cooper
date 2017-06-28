@@ -1,18 +1,6 @@
-class CreateUsers < ActiveRecord::Migration[5.0]
+class CreateStats < ActiveRecord::Migration[5.0]
   def change
-    create_table :users do |t|
-      t.string :depto
-      t.string :condo
-
-      t.timestamps
-    end
-# #esto es una agregación que se realiza por que 
-# es lo que se recomienda en la documentación d
-# las asociaciones
-
     create_table :stats do |t|
-
-      t.references :user
 
       t.integer :gender
       t.integer :b_year
@@ -41,7 +29,5 @@ class CreateUsers < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-
-    add_index :stats, :user_id
   end
 end

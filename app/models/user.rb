@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_one :stat
   VALID_DEPTO_REGEX = /\A[a-zA-Z\d]{3,7}\z/
   validates :depto, presence: true, length: { maximum: 5}, format: { with: VALID_DEPTO_REGEX },
                     uniqueness: { case_sensitive: false}
