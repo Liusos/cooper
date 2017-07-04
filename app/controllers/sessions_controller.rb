@@ -6,16 +6,11 @@ class SessionsController < ApplicationController
     user = User.find_by(depto: params[:session][:depto].downcase)
     if user && user.authenticate(params[:session][:password])
       log_in user
-      if current_user.stat.nil? #buscar una mejor forma de evaluar la instancia, pues un dato es suficiente para hacela !nil
+      if current_user.stat.nil?
         redirect_to stats_path #ruta personalizada
-
-        else
-#nos quedamos aquí y en el sanbox de la consola para probar los modelos.
-      #!NEWusaremos un condicional embebido en otro condicional.
-      #en esta parte continua la implementación, pero en realidad esto es lo que opera primero
-      #evaluar si el current_user tiene 'nil' su instanci Stat aplicar la condición correspondiente según su estado
-      #nil?
-      #En esta parte comienzan preguntas. callbacks? me pregunto
+      elsif current_user.stat.svo_6.nil? #evalua si se contesto hasta el último atributo
+        redirect_to edit_stat_stat_step_path(current_user.stat.id, "basic_info")
+      else
         redirect_back_or user
       end
     else

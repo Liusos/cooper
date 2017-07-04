@@ -40,4 +40,9 @@ module SessionsHelper
   def store_location
     session[:forwarding_url] = request.original_url if request.get?
   end
+
+  #verifica que todos los atributes de la instancia Stat esten completados
+  def full?
+
+  end
 end

@@ -26,13 +26,9 @@ class StatsController < ApplicationController
   # POST /stats
   # POST /stats.json
   def create
-    #el método idiomaticamente correcto
-    #basado en el tipo de asociación (user has_one stat / stat belongs_to user)
-    #Despues de creado, hay que redirigir a editar desde el primer paso "basic_info"
-    puts "==========="   + current_user.depto
     @stat = current_user.create_stat
-    puts "=========" +  @stat.id.to_s
     redirect_to edit_stat_stat_step_path(@stat, "basic_info")
+
     # respond_to do |format|
     #   if @stat.save(validation: false)
     #     format.html { redirect_to @stat, notice: 'Stat was successfully created.' }
