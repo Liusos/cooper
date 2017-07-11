@@ -5,6 +5,8 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :condo
       t.integer :account
       t.integer :place_id
+      t.string  :password_digest
+      t.boolean :admin,           default: false
 
 
       t.timestamps
