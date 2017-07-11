@@ -3,10 +3,13 @@ class CreateUsers < ActiveRecord::Migration[5.0]
     create_table :users do |t|
       t.string :depto
       t.string :condo
+      t.integer :account
+      t.integer :place_id
+
 
       t.timestamps
     end
-# #esto es una agregación que se realiza por que 
+# #esto es una agregación que se realiza por que
 # es lo que se recomienda en la documentación d
 # las asociaciones
 
