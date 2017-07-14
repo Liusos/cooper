@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
     create_table :users do |t|
       t.string :depto
       t.string :condo
-      t.integer :account
+      t.integer :account  #por alguna razón nooo habia columns
       t.integer :place_id
       t.string  :password_digest
       t.boolean :admin,           default: false
