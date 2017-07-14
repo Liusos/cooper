@@ -10,14 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170706020724) do
+ActiveRecord::Schema.define(version: 20170714191940) do
 
   create_table "commons", force: :cascade do |t|
     t.integer  "plus"
+    t.integer  "place_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "balance"
+  end
+
+  create_table "outcomes", force: :cascade do |t|
     t.integer  "level"
     t.string   "name"
     t.text     "description"
-    t.integer  "place_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
