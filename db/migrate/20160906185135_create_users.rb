@@ -3,10 +3,15 @@ class CreateUsers < ActiveRecord::Migration[5.0]
     create_table :users do |t|
       t.string :depto
       t.string :condo
+      t.integer :account  #por alguna razón nooo habia columns
+      t.integer :place_id
+      t.string  :password_digest
+      t.boolean :admin,           default: false
+
 
       t.timestamps
     end
-# #esto es una agregación que se realiza por que 
+# #esto es una agregación que se realiza por que
 # es lo que se recomienda en la documentación d
 # las asociaciones
 

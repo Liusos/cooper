@@ -10,7 +10,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170117213457) do
+ActiveRecord::Schema.define(version: 20170714224842) do
+
+  create_table "commons", force: :cascade do |t|
+    t.integer  "plus"
+    t.integer  "place_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "balance"
+    t.integer  "outcome_id"
+    t.index ["outcome_id"], name: "index_commons_on_outcome_id"
+  end
+
+  create_table "commons_outcomes", force: :cascade do |t|
+    t.integer "common_id"
+    t.integer "outcome_id"
+    t.index ["common_id"], name: "index_commons_outcomes_on_common_id"
+    t.index ["outcome_id"], name: "index_commons_outcomes_on_outcome_id"
+  end
+
+  create_table "outcomes", force: :cascade do |t|
+    t.integer  "level"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "common_id"
+    t.index ["common_id"], name: "index_outcomes_on_common_id"
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "age"
+    t.integer  "population"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shares", force: :cascade do |t|
+    t.integer  "amount"
+    t.integer  "user_id"
+    t.integer  "common_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "stats", force: :cascade do |t|
     t.integer  "gender"
@@ -49,6 +92,9 @@ ActiveRecord::Schema.define(version: 20170117213457) do
     t.datetime "updated_at",                      null: false
     t.string   "password_digest"
     t.boolean  "admin",           default: false
+    t.integer  "account"
+    t.integer  "place_id"
+    t.index ["place_id"], name: "index_users_on_place_id"
   end
 
 end
