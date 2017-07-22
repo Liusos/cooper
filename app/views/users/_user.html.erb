@@ -1,5 +1,5 @@
 <li>
-  <%= link_to user.depto + " "+ user.condo, user %>
+  <%= link_to user.depto + " " + user.condo, user %>
 
   <% if current_user.admin? && !current_user?(user) %>
     | <%= link_to "edit",  edit_user_path(user.id) %>

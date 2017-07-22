@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :admin_user, only: [:new, :index, :edit, :update, :destroy]
+  before_action :admin_user, only: [:new, :index, :edit, :update, :destroy] # »»» los 'users' también deben poder 'update', 'edit'«««
 
   def index
     @users = User.paginate(page: params[:page])
@@ -10,11 +10,11 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    @user = @place.users.build #ajustado para la nueva asociación con 'Place'
   end
 
   def create
-   @user = User.new(user_params)
+   @user = @place.users.build(user_params) #actualizado para la asociación con 'Place'
    if @user.save
      flash[:success] = "Participante registrado"
      redirect_to @user
@@ -44,9 +44,16 @@ class UsersController < ApplicationController
  end
 
     private
+      def set_place
+        @place = Place.find(params[:place_id])
+      end
+
+      def set_user
+        @user = @place.users.find(params[:id])
+      end
 
       def user_params
-        params.require(:user).permit(:condo, :depto, :password,
+        params.require(:user).permit(:condo, :depto, :password, # »»» agregar el 'account_attr' a los user_params «««
                                      :password_confirmation)
       end
 
