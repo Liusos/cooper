@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   delete  '/logout',          to: 'sessions#destroy'
   get     '/stats',           to: 'stats#create'  #personalizada
 
-  resources :users
+resources :users
 
   resources :stats, only: [:create, :show] do
     resources :stat_steps, only: [:edit, :update]
