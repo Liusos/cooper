@@ -1,15 +1,17 @@
 class PlacesController < ApplicationController
   before_action :set_place, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user, only: [:new, :index, :edit, :update, :show, :destroy]
 
   # GET /places
   # GET /places.json
   def index
-    @places = Place.all
+    @places = Place.paginate(page: params[:page])
   end
 
   # GET /places/1
   # GET /places/1.json
   def show
+    @place = Place.find(params[:id])
   end
 
   # GET /places/new
@@ -69,6 +71,10 @@ class PlacesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def place_params
-      params.fetch(:place, {}) # »»» indica los params Padre_santo «««
+      params.require(:place).permit(:name, :age, :population) # »»» indica los params Padre_santo «««
+    end
+
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
     end
 end
