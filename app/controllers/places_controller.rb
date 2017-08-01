@@ -12,6 +12,7 @@ class PlacesController < ApplicationController
   # GET /places/1.json
   def show
     @place = Place.find(params[:id])
+    @users = @place.users.paginate(page: params[:page]) #conseguimos una vista de los users asociados a Place
   end
 
   # GET /places/new
