@@ -10,13 +10,12 @@ Rails.application.routes.draw do
   get     '/instrucciones',   to: 'static_pages#instrucciones'
   get     '/resultados',      to: 'static_pages#resultados'
   get     '/contacto',        to: 'static_pages#contacto'
-  get     '/signup',          to: 'users#new'
   get     '/login',           to: 'sessions#new'
   post    '/login',           to: 'sessions#create'
   delete  '/logout',          to: 'sessions#destroy'
   get     '/stats',           to: 'stats#create'  #personalizada
 
-resources :users
+
 
   resources :stats, only: [:create, :show] do
     resources :stat_steps, only: [:edit, :update]
@@ -29,6 +28,8 @@ resources :users
   resources :places do
     resources :commons, :users
   end
+
+  resources :users #hay disonancia de que esta línea tenga que existir
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
