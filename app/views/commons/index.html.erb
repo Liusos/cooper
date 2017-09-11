@@ -12,8 +12,8 @@
   <tbody>
     <% @commons.each do |common| %>
       <tr>
-        <td><%= link_to 'Show', common %></td>
-        <td><%= link_to 'Edit', edit_common_path(common) %></td>
+        <td><%= link_to 'Show', place_common_path(common) %></td>
+        <td><%= link_to 'Edit', edit_place_common_path(common) %></td>
         <td><%= link_to 'Destroy', common, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -22,4 +22,4 @@
 
 <br>
 
-<%= link_to 'New Common', new_common_path %>
+<%= link_to 'New Common', new_place_common_path %>

@@ -11,10 +11,12 @@ class CommonsController < ApplicationController
   # GET /commons/1
   # GET /commons/1.json
   def show
+    @common = Common.find(params[:id])
   end
 
   # GET /commons/new
   def new
+    @place = Place.find(params[:place_id])
     @common = Common.new
   end
 
