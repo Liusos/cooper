@@ -1,5 +1,6 @@
 class CommonsController < ApplicationController
   before_action :set_common, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user, only: [:new, :index, :edit, :update, :show, :destroy]
 
   # GET /commons
   # GET /commons.json
@@ -24,7 +25,8 @@ class CommonsController < ApplicationController
   # POST /commons
   # POST /commons.json
   def create
-    @common = Common.new(common_params)
+    @place = Place.find(params[:place_id])
+    @common = @place.commons.build(common_params) #updated because Place asociation
 
     respond_to do |format|
       if @common.save
@@ -69,6 +71,10 @@ class CommonsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def common_params
-      params.fetch(:common, {})
+      params.require(:common).permit(:plus, :balance, :place_id)
+    end
+
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
     end
 end
