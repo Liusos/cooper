@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
   resources :users #hay disonancia de que esta línea tenga que existir
 
+  resources :commons #no deja de ser necesaria la declaración de estas rutas.
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 

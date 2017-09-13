@@ -1,4 +1,10 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_place_common_path(@common) %> |
-<%= link_to 'Back', :back %>
+<% provide(:title, @common.plus) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= @common.plus.to_s + " " + @common.balance.to_s %>
+      </h1>
+    </section>
+  </aside>
+</div>

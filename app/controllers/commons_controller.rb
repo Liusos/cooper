@@ -5,7 +5,7 @@ class CommonsController < ApplicationController
   # GET /commons
   # GET /commons.json
   def index
-    @commons = Common.all
+    @commons = Common.paginate(page: params[:page])
   end
 
   # GET /commons/1
@@ -29,7 +29,8 @@ class CommonsController < ApplicationController
   def create
     @place = Place.find(params[:place_id])
     @common = @place.commons.build(common_params) #updated because Place asociation
-
+    #Se observa que aquí opera 'resources: commons'
+    #sin este chunk no existirían rutas que proporcionar para '/common'
     respond_to do |format|
       if @common.save
         format.html { redirect_to @common, notice: 'Common was successfully created.' }
