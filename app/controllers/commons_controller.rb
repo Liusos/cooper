@@ -29,7 +29,7 @@ class CommonsController < ApplicationController
   def create
     @place = Place.find(params[:place_id])
     @common = @place.commons.build(common_params) #updated because Place asociation
-    #Se observa que aquí opera 'resources: commons'
+    #Se observa que aquí [ »·« ] opera 'resources: commons'
     #sin este chunk no existirían rutas que proporcionar para '/common'
     respond_to do |format|
       if @common.save
