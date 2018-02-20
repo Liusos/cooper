@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170714224842) do
+ActiveRecord::Schema.define(version: 20170911185705) do
 
   create_table "commons", force: :cascade do |t|
     t.integer  "plus"
@@ -18,15 +18,6 @@ ActiveRecord::Schema.define(version: 20170714224842) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "balance"
-    t.integer  "outcome_id"
-    t.index ["outcome_id"], name: "index_commons_on_outcome_id"
-  end
-
-  create_table "commons_outcomes", force: :cascade do |t|
-    t.integer "common_id"
-    t.integer "outcome_id"
-    t.index ["common_id"], name: "index_commons_outcomes_on_common_id"
-    t.index ["outcome_id"], name: "index_commons_outcomes_on_outcome_id"
   end
 
   create_table "outcomes", force: :cascade do |t|
@@ -35,8 +26,6 @@ ActiveRecord::Schema.define(version: 20170714224842) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "common_id"
-    t.index ["common_id"], name: "index_outcomes_on_common_id"
   end
 
   create_table "places", force: :cascade do |t|
@@ -83,6 +72,15 @@ ActiveRecord::Schema.define(version: 20170714224842) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "common_id"
+    t.integer  "outcome_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["common_id"], name: "index_transactions_on_common_id"
+    t.index ["outcome_id"], name: "index_transactions_on_outcome_id"
   end
 
   create_table "users", force: :cascade do |t|
